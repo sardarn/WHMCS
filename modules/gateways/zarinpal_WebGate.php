@@ -3,7 +3,7 @@
  * @author Masoud Amini
  * @copyright 2013
  */
-function zarinpal_config() {
+function zarinpalwg_config() {
     $configarray = array(
      "FriendlyName" => array("Type" => "System", "Value"=>"پرداخت آنلاين از درگاه زرين پال"),
      "merchantID" => array("FriendlyName" => "merchantID", "Type" => "text", "Size" => "50", ),
@@ -14,7 +14,7 @@ function zarinpal_config() {
 	return $configarray;
 }
 
-function zarinpal_link($params) {
+function zarinpalwg_link($params) {
 
 	# Gateway Specific Variables
 	$merchantID = $params['merchantID'];
