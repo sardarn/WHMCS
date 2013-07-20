@@ -32,7 +32,7 @@
 			$mirror = 'ir';
 			break;
 		default:
-			$mirror = 'www';
+			$mirror = 'de';
 			break;
 	}
 	
