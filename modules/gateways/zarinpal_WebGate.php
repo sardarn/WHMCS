@@ -48,7 +48,7 @@ function zarinpalwg_link($params) {
 	# Enter your code submit to the gateway...
 
 	$code = '
-    <form method="post" action="./zarinpal_WebGate.php">
+    <form method="post" action="./zarinpalzg.php">
         <input type="hidden" name="merchantID" value="'. $merchantID .'" />
         <input type="hidden" name="invoiceid" value="'. $invoiceid .'" />
         <input type="hidden" name="amount" value="'. $amount .'" />
