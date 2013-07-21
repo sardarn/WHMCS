@@ -9,7 +9,7 @@
 	include('../../../includes/gatewayfunctions.php');
 	include('../../../includes/invoicefunctions.php');
 
-	$gatewaymodule = 'zarinpal_WebGate'; # Enter your gateway module name here replacing template
+	$gatewaymodule = 'zarinpalzg'; # Enter your gateway module name here replacing template
 
 	$GATEWAY = getGatewayVariables($gatewaymodule);
 	if (!$GATEWAY['type']) die('Module Not Activated'); # Checks gateway module is active before accepting callback
