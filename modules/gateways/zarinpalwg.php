@@ -5,7 +5,7 @@
  */
 function zarinpalwg_config() {
     $configarray = array(
-     "FriendlyName" => array("Type" => "System", "Value"=>"پرداخت آنلاين از درگاه زرين پال"),
+     "FriendlyName" => array("Type" => "System", "Value"=>"پرداخت آنلاين از درگاه زرين پال -زرین گیت"),
      "merchantID" => array("FriendlyName" => "merchantID", "Type" => "text", "Size" => "50", ),
      "Currencies" => array("FriendlyName" => "Currencies", "Type" => "dropdown", "Options" => "Rial,Toman", ),
 	 "MirrorName" => array("FriendlyName" => "نود اتصال", "Type" => "dropdown", "Options" => "آلمان,ایران,خودکار", "Description" => "چناانچه سرور شما در ایران باشد ایران دا انتخاب کنید و در غیر اینصورت آلمان و یا خودکار را انتخاب کنید", ),
