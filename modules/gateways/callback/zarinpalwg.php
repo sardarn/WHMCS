@@ -44,7 +44,7 @@
 
 	if($_GET['Status'] == 'OK'){
 		try {
-			$client = new SoapClient('http://'. $mirror .'.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
+			$client = new SoapClient('https://'. $mirror .'.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
 			$resultO = $client->PaymentVerification(
 				array(
 						'MerchantID'	 => $GATEWAY['merchantID'],
