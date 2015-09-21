@@ -4,10 +4,17 @@
 	* @copyright 2013
 	*/
 	# Required File Includes
-	include('../../../dbconnect.php');
-	include('../../../includes/functions.php');
-	include('../../../includes/gatewayfunctions.php');
-	include('../../../includes/invoicefunctions.php');
+if(file_exists('../../../init.php'))
+{
+require( '../../../init.php' );
+
+}else{
+
+require("../../../dbconnect.php");
+}
+include("../../../includes/functions.php");
+include("../../../includes/gatewayfunctions.php");
+include("../../../includes/invoicefunctions.php");
 
 	$gatewaymodule = 'zarinpalwg'; # Enter your gateway module name here replacing template
 
