@@ -9,7 +9,7 @@ function zarinpalwg_config() {
      "merchantID" => array("FriendlyName" => "merchantID", "Type" => "text", "Size" => "50", ),
      "Currencies" => array("FriendlyName" => "Currencies", "Type" => "dropdown", "Options" => "Rial,Toman", ),
 	 "MirrorName" => array("FriendlyName" => "نود اتصال", "Type" => "dropdown", "Options" => "آلمان,ایران,خودکار", "Description" => "چناانچه سرور شما در ایران باشد ایران دا انتخاب کنید و در غیر اینصورت آلمان و یا خودکار را انتخاب کنید", ),
-     "afp" => array("FriendlyName" => "افزودن کارمزد به قیمت ها", "Type" => "yesno", "Description" => "در صورت انتخاب 2.5 درصد به هزینه پرداخت شده افزوده می شود.", ),
+     "afp" => array("FriendlyName" => "افزودن کارمزد به قیمت ها", "Type" => "yesno", "Description" => "در صورت انتخاب 1 درصد به هزینه پرداخت شده افزوده می شود.", ),
      );
 	return $configarray;
 }
