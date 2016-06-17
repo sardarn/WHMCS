@@ -27,7 +27,7 @@ include("../../../includes/invoicefunctions.php");
 	$Authority  = $_GET['Authority'];
 	$invoiceid  = checkCbInvoiceID($invoiceid, $GATEWAY['name']); # Checks invoice ID is a valid invoice number or ends processing
 
-	$CaculatedFee = round($Amount*0.025);
+	$CaculatedFee = round($Amount*0.01);
 	
 	if($GATEWAY['afp'] == 'on'){
 		$PaidFee 	= 0;
