@@ -19,7 +19,7 @@
 	}
 	
 	if($_POST['afp']=='on'){
-		$Fee = round($Amount*0.025);
+		$Fee = round($Amount*0.01);
 	} else {
 		$Fee = 0;
 	}
