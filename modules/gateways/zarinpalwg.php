@@ -47,8 +47,58 @@ function zarinpalwg_link($params) {
 
 	# Enter your code submit to the gateway...
 
-	$code = '
-    <form method="post" action="./zarinpalwg.php">
+	if(isset($_POST['pay']) OR strpos($_SERVER['PHP_SELF'],'cart.php') > 0)
+	{
+		$Amount = intval($amount);
+		if($currencies == 'Rial'){
+			$Amount = round($Amount/10);
+		}
+		
+		if($afp=='on'){
+			$Fee = round($Amount*0.01);
+		} else {
+			$Fee = 0;
+		}
+		
+		switch($mirrorname){
+			case 'آلمان': 
+				$mirror = 'de';
+				break;
+			case 'ایران':
+				$mirror = 'ir';
+				break;
+			default:
+				$mirror = 'de';
+				break;
+		}
+		
+		$CallbackURL = $_POST['systemurl'] .'/modules/gateways/callback/zarinpalwg.php?invoiceid='. $invoiceid;
+		try {
+			$client = new SoapClient('https://'. $mirror .'.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
+		
+			$result = $client->PaymentRequest(
+												array(
+														'MerchantID' 	=> $merchantID,
+														'Amount' 		=> $Amount+$Fee,
+														'Description' 	=> 'Invoice ID: '. $invoiceid,
+														'Email' 		=> $email,
+														'Mobile' 		=> $phone,
+														'CallbackURL' 	=> $CallbackURL
+													)
+											);
+		} catch (Exception $e) {
+			$code =  '<h2>وقوع وقفه!</h2>';
+			$code .= $e->getMessage();
+		}
+		if($result->Status == 100){ 
+			$Authority = $result->Authority;
+			
+			mysql_query("INSERT INTO `tblZarinPalLog` (`orderId`,`Amount`,`Authority`) VALUES ('".$invoiceid."','".$Amount."','".$Authority."') ");
+			$url = 'https://www.zarinpal.com/pg/StartPay/' . $result->Authority;
+			header('Location: '. $url);
+				
+			if(! strpos($_SERVER['PHP_SELF'],'cart.php') > 0)
+				$code .= '<form method="post" action="">
         <input type="hidden" name="merchantID" value="'. $merchantID .'" />
         <input type="hidden" name="invoiceid" value="'. $invoiceid .'" />
         <input type="hidden" name="amount" value="'. $amount .'" />
@@ -59,8 +109,12 @@ function zarinpalwg_link($params) {
 		<input type="hidden" name="cellnum" value="'. $phone .'" />
 		<input type="hidden" name="mirrorname" value="'. $mirrorname .'" />
         <input type="submit" name="pay" value=" پرداخت " />
-    </form>
-    ';
+    </form>';
+		} else {
+			$code = "<h2>وقوع خطا در ارتباط!</h2>"
+				.'کد خطا'. $result->Status;
+		}
+	}
 
 	return $code;
 }
