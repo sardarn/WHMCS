@@ -46,6 +46,21 @@ function zarinpalzg_link($params) {
 	$currency = $params['currency'];
 
 	# Enter your code submit to the gateway...
+	
+	$code = '
+    <form method="post" action="">
+        <input type="hidden" name="merchantID" value="'. $merchantID .'" />
+        <input type="hidden" name="invoiceid" value="'. $invoiceid .'" />
+        <input type="hidden" name="amount" value="'. $amount .'" />
+        <input type="hidden" name="currencies" value="'. $currencies .'" />
+        <input type="hidden" name="afp" value="'. $afp .'" />
+        <input type="hidden" name="systemurl" value="'. $systemurl .'" />
+		<input type="hidden" name="email" value="'. $email .'" />
+		<input type="hidden" name="cellnum" value="'. $phone .'" />
+		<input type="hidden" name="mirrorname" value="'. $mirrorname .'" />
+        <input type="submit" name="pay" value=" پرداخت " />
+    </form>
+    ';
 
 	if(isset($_POST['pay']) OR strpos($_SERVER['PHP_SELF'],'cart.php') > 0)
 	{
@@ -92,6 +107,14 @@ function zarinpalzg_link($params) {
 		}
 		if($result->Status == 100){ 
 			$Authority = $result->Authority;
+			
+			mysql_query("CREATE TABLE IF NOT EXISTS `tblZarinPalLog` (
+				  `id` int(11) NOT NULL AUTO_INCREMENT,
+				  `orderId` varchar(32) NOT NULL,
+				  `Amount` varchar(32) NOT NULL,
+				  `Authority` varchar(64) NOT NULL,
+				  PRIMARY KEY (`id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
 			
 			mysql_query("INSERT INTO `tblZarinPalLog` (`orderId`,`Amount`,`Authority`) VALUES ('".$invoiceid."','".$Amount."','".$Authority."') ");
 			$url = 'https://www.zarinpal.com/pg/StartPay/' . $result->Authority;
